@@ -1,0 +1,258 @@
+/*
+=============== 
+Fonts
+===============
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap");
+
+/*
+=============== 
+Variables
+===============
+*/
+
+:root {
+  /* primary */
+  --soft-red: hsl(10, 79%, 65%);
+  --cyan: hsl(186, 34%, 60%);
+  /* neutral */
+  --dark-brown: hsl(25, 47%, 15%);
+  --medium-brown: hsl(28, 10%, 53%);
+  --cream: hsl(27, 66%, 92%);
+  --very-pale-orange: hsl(33, 100%, 98%);
+  /* font */
+  --bold: 700;
+  --default: 400;
+  --total-spend-font-size: 2.5rem;
+  /* styles */
+  --border-radius: 1rem;
+  --border-radius-chart: 0.25rem;
+  --chart-columns-gap: 0.938rem;
+  --padding-card-hovered-price: 0.313rem;
+  --opacity-hovering: 0.6;
+  --max-height-chart-bar: 109px;
+  --row-gap-component: 1.25rem;
+  --padding-container: 1.5rem;
+  /* grid setup */
+  --balance-container: 1fr;
+  --spending-amount-container: 250px;
+  --spending-amount-bottom: 25px;
+  --total-amount-container: 100px;
+  --total-amount-top: 25px;
+  --chart-template-columns: repeat(7, 2.5rem);
+  --height-spending-amount: calc(
+    var(--spending-amount-container) + var(--spending-amount-bottom)
+  );
+  --height-total-amount: var(--total-amount-container) + var(--total-amount-top);
+  --spending-container: calc(
+    var(--height-spending-amount) + var(--height-total-amount)
+  );
+}
+
+/*
+=============== 
+Global Styles
+===============
+*/
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+  font-size: 1.125rem;
+  background-color: var(--cream);
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+}
+
+/*
+=============== 
+Section
+===============
+*/
+
+.section-center {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
+.component {
+  display: grid;
+  place-content: center;
+  grid-template-rows: var(--balance-container) var(--spending-container);
+  row-gap: var(--row-gap-component);
+}
+
+/*
+=============== 
+Container
+===============
+*/
+
+.container {
+  border-radius: var(--border-radius);
+  padding: var(--padding-container);
+}
+
+/*
+=============== 
+Balance Container
+===============
+*/
+
+.balance {
+  background-color: var(--soft-red);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.balance h2 {
+  color: var(--cream);
+  font-size: 0.875rem;
+  font-weight: var(--default);
+  line-height: 1.5;
+}
+
+.my-balance-amount {
+  font-weight: var(--bold);
+  font-size: 1.563rem;
+  display: block;
+}
+
+/*
+=============== 
+Spending Container
+===============
+*/
+
+.spending {
+  background-color: var(--very-pale-orange);
+  display: grid;
+  grid-template-rows: var(--spending-amount-container) var(
+      --total-amount-container
+    );
+  place-content: space-between;
+}
+
+.spending-amount {
+  display: grid;
+  grid-template-rows: 1fr 4fr;
+  padding-bottom: var(--spending-amount-bottom);
+}
+
+.spending-amount h1 {
+  font-size: 1.5rem;
+}
+
+.chart {
+  display: grid;
+  grid-template-columns: var(--chart-template-columns);
+  column-gap: var(--chart-columns-gap);
+}
+
+.chart-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.625rem;
+}
+
+.chart-bar.hover .hovered-price {
+  display: block;
+}
+
+.hovered-price {
+  display: none;
+  background-color: var(--dark-brown);
+  padding: var(--padding-card-hovered-price);
+  border-radius: var(--border-radius-chart);
+}
+
+.bar.today {
+  background-color: var(--cyan);
+}
+
+.hovered-price span {
+  font-size: 0.875rem;
+  font-weight: var(--bold);
+  color: var(--cream);
+}
+
+.bar {
+  width: 100%;
+  /* dynamic value from JS 
+  height 100% = 109px*/
+  height: 109px;
+  /* end dynamic value JS */
+  max-height: var(--max-height-chart-bar);
+  background-color: var(--soft-red);
+  border-radius: var(--border-radius-chart);
+}
+
+.chart-bar.hover .bar {
+  opacity: var(--opacity-hovering);
+}
+
+.day {
+  color: var(--medium-brown);
+  font-size: 0.813rem;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 2px solid var(--cream);
+  padding-top: var(--total-amount-top);
+}
+
+.total h2 {
+  color: var(--medium-brown);
+  font-size: 0.938rem;
+  font-weight: var(--default);
+}
+
+.total-month {
+  font-weight: var(--bold);
+  font-size: var(--total-spend-font-size);
+  display: block;
+  color: var(--dark-brown);
+}
+
+.from-last-month {
+  margin-bottom: 8px;
+}
+
+.percent {
+  display: block;
+  font-weight: var(--bold);
+  color: var(--dark-brown);
+  text-align: right;
+}
+
+@media screen and (max-width: 470px) {
+  :root {
+    --chart-template-columns: repeat(7, 2rem);
+    --total-spend-font-size: 2.2rem;
+  }
+}
