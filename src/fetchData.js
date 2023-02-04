@@ -1,4 +1,5 @@
-const url = "https://github.com/kevinburle/expenses-chart-component/blob/main/data.json";
+const url =
+  "https://raw.githubusercontent.com/kevinburle/expenses-chart-component/main/data.json";
 
 const fetchData = async () => {
   const response = await fetch(url);
